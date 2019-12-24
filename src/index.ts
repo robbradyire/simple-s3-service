@@ -30,12 +30,13 @@ const listImagesHandler: RequestHandler = (_req, res) => {
     if (err) {
       res.send(err);
     } else {
+      res.setHeader('Content-type', 'application/json');
       res.send(data.Contents ? data.Contents.map(s3Obj => s3Obj.Key) : []);
     }
   });
 };
 
-app.get('/images', listImagesHandler);
+app.get('/api/images', listImagesHandler);
 
 app.listen(port, function() {
   console.log(`Example app listening on port ${port}!`);
